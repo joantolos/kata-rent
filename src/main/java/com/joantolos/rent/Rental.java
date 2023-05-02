@@ -2,53 +2,53 @@ package com.joantolos.rent;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Rental {
 
-    private final Client client;
-    private final Car car;
-    private final Date startDate;
-    private final Date endDate;
+    private final LocalDate start;
+    private final LocalDate end;
     private final int totalKm;
+    private final Car car;
+    private final Client client;
     private final List<Damage> damages;
 
-    public Rental(Client client, Car car, Date startDate, Date endDate, int totalKm) {
-        this.client = client;
-        this.car = car;
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public Rental(LocalDate start, LocalDate end, int totalKm, Car car, Client client) {
+        this.start = start;
+        this.end = end;
         this.totalKm = totalKm;
+        this.car = car;
+        this.client = client;
         this.damages = new ArrayList<>();
+        this.car.addRental(this);
     }
 
-    public void addDamage(Damage damage) {
-        damages.add(damage);
+    public LocalDate getStart() {
+        return start;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
+    public LocalDate getEnd() {
+        return end;
     }
 
     public int getTotalKm() {
         return totalKm;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
     public List<Damage> getDamages() {
         return damages;
+    }
+
+    public void addDamage(Damage damage) {
+        damages.add(damage);
     }
 
     public double getPendingDamageCost() {

@@ -24,7 +24,7 @@ public class Damage {
         return repaired;
     }
 
-    public void repair() {
-        repaired = true;
+    public void repair(boolean repaired) {
+        this.repaired = repaired;
     }
 }
