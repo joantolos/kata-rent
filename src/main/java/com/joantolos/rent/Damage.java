@@ -2,8 +2,8 @@ package com.joantolos.rent;
 
 public class Damage {
 
-    private String description;
-    private double cost;
+    private final String description;
+    private final double cost;
     private boolean repaired;
 
     public Damage(String description, double cost) {
