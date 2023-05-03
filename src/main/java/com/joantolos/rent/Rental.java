@@ -2,25 +2,22 @@ package com.joantolos.rent;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Rental {
+public class Rental extends Damageable {
 
     private final LocalDate start;
     private final LocalDate end;
     private final int totalKm;
     private final Car car;
     private final Client client;
-    private final List<Damage> damages;
 
     public Rental(LocalDate start, LocalDate end, int totalKm, Car car, Client client) {
+        super(new ArrayList<>( ));
         this.start = start;
         this.end = end;
         this.totalKm = totalKm;
         this.car = car;
         this.client = client;
-        this.damages = new ArrayList<>();
-        this.car.addRental(this);
     }
 
     public LocalDate getStart() {
@@ -43,22 +40,9 @@ public class Rental {
         return client;
     }
 
-    public List<Damage> getDamages() {
-        return damages;
-    }
-
+    @Override
     public void addDamage(Damage damage) {
-        damages.add(damage);
+        this.car.addDamage(damage);
+        super.addDamage(damage);
     }
-
-    public double getPendingDamageCost() {
-        double pendingDamageCost = 0.0;
-        for (Damage damage : damages) {
-            if (!damage.isRepaired()) {
-                pendingDamageCost += damage.getCost();
-            }
-        }
-        return pendingDamageCost;
-    }
-
 }
